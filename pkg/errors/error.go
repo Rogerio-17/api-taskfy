@@ -3,6 +3,11 @@ package errors
 import "errors"
 
 var (
+	// General errors
+	ErrInternalServerError = errors.New("Internal server error")
+	ErrInvalidRequest      = errors.New("Invalid request")
+	ErrInvalidData         = errors.New("Invalid data")
+
 	// User errors
 	ErrEmptyName          = errors.New("Name is required")
 	ErrEmptyEmail         = errors.New("Email is required")
@@ -15,6 +20,7 @@ var (
 	ErrEmptyUserId  = errors.New("User is requered")
 	ErrEmptyTitle   = errors.New("Title is required")
 	ErrTaskNotFound = errors.New("Task not found")
+	ErrUnauthorized = errors.New("Unauthorized")
 
 	// Auth errors
 	ErrInvalidAuthorization = errors.New("Token não informado")

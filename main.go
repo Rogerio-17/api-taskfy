@@ -33,7 +33,11 @@ func main() {
 	router.HandleFunc("POST /login", userHandler.Login)
 
 	// Rotas autenticadas
+	router.HandleFunc("POST /tasks", authMiddleare.VerifyAuthentication(taskHandler.CreateTask))
 	router.HandleFunc("GET /tasks", authMiddleare.VerifyAuthentication(taskHandler.ListTasks))
+	router.HandleFunc("PUT /tasks/{id}", authMiddleare.VerifyAuthentication(taskHandler.UpdateTask))
+	router.HandleFunc("PATCH /tasks/{id}/complete", authMiddleare.VerifyAuthentication(taskHandler.MarkTaskAsCompleted))
+	router.HandleFunc("PATCH /tasks/{id}/incomplete", authMiddleare.VerifyAuthentication(taskHandler.MarkTaskAsIncomplete))
 
 	port := ":8080"
 	fmt.Printf("Servidor rodando na porta %s\n", port)

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"taskify/internal/helpers"
 	"taskify/internal/usecase"
+	"taskify/pkg/errors"
 )
 
 type UserHandler struct {
@@ -35,7 +36,7 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var requestBody CreateUserRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&requestBody); err != nil {
-		helpers.ResponseWithError(w, http.StatusBadRequest, "Dados inválidos")
+		helpers.ResponseWithError(w, http.StatusBadRequest, errors.ErrInvalidData.Error())
 		return
 	}
 
@@ -71,7 +72,7 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 	var requestBody LoginRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&requestBody); err != nil {
-		helpers.ResponseWithError(w, http.StatusBadRequest, "Dados invalidos")
+		helpers.ResponseWithError(w, http.StatusBadRequest, errors.ErrInvalidData.Error())
 		return
 	}
 

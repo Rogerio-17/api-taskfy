@@ -10,6 +10,7 @@ type TaskRepository interface {
 	Create(newUser *Task) error
 	GetById(id string) (*Task, error)
 	FindMany(userId string) ([]*Task, error)
+	Update(task *Task) error
 }
 
 type Task struct {

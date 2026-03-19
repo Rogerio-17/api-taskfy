@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"fmt"
 	"taskify/internal/domain"
 	apperros "taskify/pkg/errors"
 )
@@ -20,7 +19,6 @@ func NewTaskRepositoryInMemory() *TaskRepositoryInMemory {
 
 func (r *TaskRepositoryInMemory) Create(newTask *domain.Task) error {
 	r.tasks[newTask.Id] = newTask
-	fmt.Println(r.tasks)
 	return nil
 }
 
@@ -43,4 +41,13 @@ func (r *TaskRepositoryInMemory) FindMany(userId string) ([]*domain.Task, error)
 	}
 
 	return userTasks, nil
+}
+
+func (r *TaskRepositoryInMemory) Update(task *domain.Task) error {
+	if _, ok := r.tasks[task.Id]; !ok {
+		return apperros.ErrTaskNotFound
+	}
+
+	r.tasks[task.Id] = task
+	return nil
 }
